@@ -110,6 +110,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
         this.vppos = new me.Vector2d(x, y);
 
         this.spawnPosition = new me.Vector2d(x, y);
+        console.log(x);
 
         this.deathTimer = 0;
         this.gameOver = false;
@@ -161,24 +162,24 @@ game.PlayerEntity = me.ObjectEntity.extend({
                 }
 
             }
-            if (me.input.isKeyPressed("attack")) {
-                if (!this.attacking) {
-                    this.attacking = true;
-                    this.renderable.setCurrentAnimation("attack", (function () {
-                        this.renderable.setCurrentAnimation("walk");
-                        this.attacking = false;
-                    }).bind(this));
-                    this.renderable.setAnimationFrame(0);
+            // if (me.input.isKeyPressed("attack")) {
+            //     if (!this.attacking) {
+            //         this.attacking = true;
+            //         this.renderable.setCurrentAnimation("attack", (function () {
+            //             this.renderable.setCurrentAnimation("walk");
+            //             this.attacking = false;
+            //         }).bind(this));
+            //         this.renderable.setAnimationFrame(0);
 
-                    // me.audio.play("melee", false, null, 1);
-                }
-            }
-            if (me.input.isKeyPressed("throw") && game.data.jacks > 0) {
-                var bul = new game.ProjectileEntity((this.pos.x + (this.renderable.hWidth - 15)) + (this.facing * 10), this.pos.y+90, { x: this.facing * 15, y: 0 }, { image: "jack", spritewidth: 30, spriteheight: 32 });
-                me.game.add(bul);
+            //         // me.audio.play("melee", false, null, 1);
+            //     }
+            // }
+            // if (me.input.isKeyPressed("throw") && game.data.jacks > 0) {
+            //     var bul = new game.ProjectileEntity((this.pos.x + (this.renderable.hWidth - 15)) + (this.facing * 10), this.pos.y+90, { x: this.facing * 15, y: 0 }, { image: "jack", spritewidth: 30, spriteheight: 32 });
+            //     me.game.add(bul);
 
-                game.data.jacks--;
-            }
+            //     game.data.jacks--;
+            // }
 
 
             // if ((this.jumping || this.falling) && !this.attacking) {
@@ -196,44 +197,44 @@ game.PlayerEntity = me.ObjectEntity.extend({
         // check & update player movement
         this.updateMovement();
 
-        // if (this.pos.y+100 > me.game.currentLevel.rows * me.game.currentLevel.tileheight && !this.dying) {
+        // if (this.pos.y+150 > me.game.currentLevel.rows * me.game.currentLevel.tileheight && !this.dying) {
         //     this.vel.y = -this.maxVel.y;
         //     this.vel.x = 0;
         //     // this.die();
         // }
 
-        // if (this.attacking) {
-        //     // this.updateColRect(40, 140, 90, 52);
-        // }
+        if (this.attacking) {
+            this.updateColRect(40, 140, 90, 52);
+        }
 
-        // var res = me.game.collide(this);
+        var res = me.game.collide(this);
 
-        // // this.updateColRect(90, 40, 90, 52);
+        this.updateColRect(90, 40, 90, 52);
 
-        // if (res) {
-        //     //if (res.obj.type == me.game.COLLECTABLE_OBJECT) {
+        if (res) {
+            //if (res.obj.type == me.game.COLLECTABLE_OBJECT) {
 
-        //     //}
-        // }
+            //}
+        }
 
-        //game.data.jacks = this.jacks;
+        // game.data.jacks = this.jacks;
 
-        // if (this.dying && this.renderable.anim["die"].idx == 7) {
-        //     this.renderable.animationpause = true;
-        //     this.deathTimer -= me.timer.tick;
-        //     if (this.deathTimer <= 0) {
-        //         if (game.data.lives == 0) {
-        //             this.gameOver = true;
-        //             // me.state.stop(true);
-        //             me.state.change(me.state.MENU);
-        //             return;
-        //         } else {
-        //             me.game.viewport.fadeIn("#000000", 500, this.reset.bind(this));
-        //         }
-        //     }
-        //     //this.renderable.alpha -= 0.01;
-        //     //if (this.renderable.alpha <= 0.01) me.game.remove(this);
-        // }
+        if (this.dying && this.renderable.anim["die"].idx == 7) {
+            this.renderable.animationpause = true;
+            this.deathTimer -= me.timer.tick;
+            if (this.deathTimer <= 0) {
+                if (game.data.lives == 0) {
+                    this.gameOver = true;
+                    // me.state.stop(true);
+                    me.state.change(me.state.MENU);
+                    return;
+                } else {
+                    me.game.viewport.fadeIn("#000000", 500, this.reset.bind(this));
+                }
+            }
+            //this.renderable.alpha -= 0.01;
+            //if (this.renderable.alpha <= 0.01) me.game.remove(this);
+        }
 
         // update animation if necessary
         if (this.vel.x != 0 || this.vel.y != 0 || this.attacking || this.dying) {
@@ -245,7 +246,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
         // else inform the engine we did not perform
         // any update (e.g. position, animation)
         return false;
-    }
+    },
 
     // die: function () {
     //     if (!this.dying) {
@@ -261,24 +262,24 @@ game.PlayerEntity = me.ObjectEntity.extend({
     //     }
     // },
 
-    // reset: function () {
+    reset: function () {
        
-    //     this.pos.x = this.spawnPosition.x;
-    //     this.pos.y = this.spawnPosition.y;
-    //     this.dying = false;
-    //     this.attacking = false;
-    //     this.falling = false;
-    //     this.jumping = false;
-    //     this.deathTimer = 0;
-    //     this.renderable.animationpause = false;
-    //     this.renderable.setCurrentAnimation("walk");
-    //     this.renderable.setAnimationFrame(0);
-    //     this.setVelocity(0.5, 1);
-    //     this.setFriction(0.25, 0);
-    //     this.setMaxVelocity(5, 15);
-    //     //me.game.viewport.fadeIn("#FFFFFF", 500);
+        this.pos.x = this.spawnPosition.x;
+        this.pos.y = this.spawnPosition.y;
+        this.dying = false;
+        this.attacking = false;
+        this.falling = false;
+        this.jumping = false;
+        this.deathTimer = 0;
+        this.renderable.animationpause = false;
+        this.renderable.setCurrentAnimation("walk");
+        this.renderable.setAnimationFrame(0);
+        this.setVelocity(0.5, 1);
+        this.setFriction(0.25, 0);
+        this.setMaxVelocity(5, 15);
+        //me.game.viewport.fadeIn("#FFFFFF", 500);
 
-    //     //this.init(this.spawnPosition.x, this.spawnPosition.y, { image: "girl" });
-    // }
+        //this.init(this.spawnPosition.x, this.spawnPosition.y, { image: "girl" });
+    }
 
 });
