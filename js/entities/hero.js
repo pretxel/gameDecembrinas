@@ -78,13 +78,13 @@ game.PlayerEntity = me.ObjectEntity.extend({
 
     init: function (x, y, settings) {
         // call the constructor
-        settings.spritewidth = 64;
-        settings.spriteheight = 64;
+        settings.spritewidth = 84;
+        // settings.spriteheight = 64;
 
         this.parent(x, y, settings);
 
         this.renderable.anim = {};
-        this.renderable.addAnimation("walk", [0, 1, 2, 3, 4, 5, 6, 7]);
+        this.renderable.addAnimation("walk", [0, 1, 2, 3, 4, 5, 6]);
         // this.renderable.addAnimation("attack", [8, 6, 7]);
         // this.renderable.addAnimation("jump", [9]);
         // this.renderable.addAnimation("die", [10,11,12,13,14,16,17,18]);
@@ -96,11 +96,11 @@ game.PlayerEntity = me.ObjectEntity.extend({
         this.setFriction(0.25, 0);
         this.setMaxVelocity(5, 15);
         
-        // this.gravity = 0.5;
+        this.gravity = 0.5;
       
-        this.updateColRect(80, 60, 90, 52);
+        // this.updateColRect(80, 60, 90, 52);
 
-        // this.attacking = false;
+        this.attacking = false;
         this.alwaysUpdate = true;
 
         this.dying = false;
@@ -182,34 +182,34 @@ game.PlayerEntity = me.ObjectEntity.extend({
             // }
 
 
-            // if ((this.jumping || this.falling) && !this.attacking) {
-            //     // this.renderable.setCurrentAnimation("jump");
-            // }
-            // else {
-            //     if (!this.renderable.isCurrentAnimation("walk") && !this.attacking) this.renderable.setCurrentAnimation("walk");
-            // }
+            if ((this.jumping || this.falling) && !this.attacking) {
+                // this.renderable.setCurrentAnimation("jump");
+            }
+            else {
+                if (!this.renderable.isCurrentAnimation("walk") && !this.attacking) this.renderable.setCurrentAnimation("walk");
+            }
 
-            // if (me.input.isKeyPressed("levelskip")) {
-            //     me.levelDirector.nextLevel();
-            //     return false;
-            // }
+            if (me.input.isKeyPressed("levelskip")) {
+                me.levelDirector.nextLevel();
+                return false;
+            }
         }
         // check & update player movement
         this.updateMovement();
 
-        // if (this.pos.y+150 > me.game.currentLevel.rows * me.game.currentLevel.tileheight && !this.dying) {
-        //     this.vel.y = -this.maxVel.y;
-        //     this.vel.x = 0;
-        //     // this.die();
-        // }
+        if (this.pos.y+50 > me.game.currentLevel.rows * me.game.currentLevel.tileheight && !this.dying) {
+            this.vel.y = -this.maxVel.y;
+            this.vel.x = 0;
+            this.die();
+        }
 
         if (this.attacking) {
-            this.updateColRect(40, 140, 90, 52);
+            // this.updateColRect(40, 140, 90, 52);
         }
 
         var res = me.game.collide(this);
 
-        this.updateColRect(90, 40, 90, 52);
+        // this.updateColRect(90, 40, 90, 52);
 
         if (res) {
             //if (res.obj.type == me.game.COLLECTABLE_OBJECT) {
@@ -219,22 +219,28 @@ game.PlayerEntity = me.ObjectEntity.extend({
 
         // game.data.jacks = this.jacks;
 
-        if (this.dying && this.renderable.anim["die"].idx == 7) {
-            this.renderable.animationpause = true;
-            this.deathTimer -= me.timer.tick;
-            if (this.deathTimer <= 0) {
-                if (game.data.lives == 0) {
-                    this.gameOver = true;
-                    // me.state.stop(true);
-                    me.state.change(me.state.MENU);
-                    return;
-                } else {
-                    me.game.viewport.fadeIn("#000000", 500, this.reset.bind(this));
-                }
-            }
-            //this.renderable.alpha -= 0.01;
-            //if (this.renderable.alpha <= 0.01) me.game.remove(this);
+        // if (this.dying && this.renderable.anim["die"].idx == 7) {
+        //     this.renderable.animationpause = true;
+        //     this.deathTimer -= me.timer.tick;
+        //     if (this.deathTimer <= 0) {
+        //         if (game.data.lives == 0) {
+        //             this.gameOver = true;
+        //             // me.state.stop(true);
+        //             me.state.change(me.state.MENU);
+        //             return;
+        //         } else {
+        //             me.game.viewport.fadeIn("#000000", 500, this.reset.bind(this));
+        //         }
+        //     }
+        //     //this.renderable.alpha -= 0.01;
+        //     //if (this.renderable.alpha <= 0.01) me.game.remove(this);
+        // }
+
+        
+        if (this.dying){
+            me.game.viewport.fadeIn("#000000", 500, this.reset.bind(this));
         }
+
 
         // update animation if necessary
         if (this.vel.x != 0 || this.vel.y != 0 || this.attacking || this.dying) {
@@ -248,19 +254,19 @@ game.PlayerEntity = me.ObjectEntity.extend({
         return false;
     },
 
-    // die: function () {
-    //     if (!this.dying) {
-    //         this.dying = true;
-    //         this.renderable.setCurrentAnimation("die");
-    //         this.renderable.setAnimationFrame(0);
-    //         me.audio.play("tilly_die", false, null, 0.6);
+    die: function () {
+        if (!this.dying) {
+            this.dying = true;
+            // this.renderable.setCurrentAnimation("die");
+            this.renderable.setAnimationFrame(0);
+            // me.audio.play("tilly_die", false, null, 0.6);
 
-    //         game.data.lives--;
+            game.data.lives--;
 
-    //         this.deathTimer = 100;
+            this.deathTimer = 100;
 
-    //     }
-    // },
+        }
+    },
 
     reset: function () {
        
