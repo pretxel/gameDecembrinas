@@ -15,6 +15,6 @@ game.PlayScreen = me.ScreenObject.extend({
 	 */
 	onDestroyEvent: function() {
 	    // remove the HUD from the game world
-	    me.game.world.removeChild(me.game.world.getEntityByProp("name", "HUD")[0]);
+	    //me.game.world.removeChild(me.game.world.getEntityByProp("name", "HUD")[0]);
 	}
 });

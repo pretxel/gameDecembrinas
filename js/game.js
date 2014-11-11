@@ -30,7 +30,7 @@ var game = {
         me.loader.preload(game.resources);
 
         // Initialize melonJS and display a loading screen.
-        // me.state.set(me.state.LOADING, new myLoadingScreen());
+        me.state.set(me.state.LOADING, new myLoadingScreen());
         me.state.change(me.state.LOADING);
 
         
@@ -54,7 +54,7 @@ var game = {
 
 
         // Enemies
-        // me.entityPool.add("WalkingEnemy", game.WalkingEnemy);
+        me.entityPool.add("WalkingEnemy", game.WalkingEnemy);
         // me.entityPool.add("FlyingEnemy", game.FlyingEnemy);
 
 
@@ -72,6 +72,10 @@ var game = {
 
         // Start the game.
         me.state.change(me.state.PLAY);
+
+        me.save.add(game.data);
+        // me.state.set(me.state.SCORE, new myScoreScreen());
+        // me.state.change(me.state.SCORE);
     }
 
 }
@@ -98,8 +102,19 @@ me.LevelEntity = me.ObjectEntity.extend(
          * @ignore
          */
         onFadeComplete: function () {
-            me.levelDirector.loadLevel(this.gotolevel);
-            me.game.viewport.fadeOut(this.fade, this.duration);
+
+            me.save.score = game.data.score;
+            if (this.gotolevel == "FIN"){
+                console.log("Termino el Juego");
+                me.state.set(me.state.SCORE, new myScoreScreen());
+                me.state.change(me.state.SCORE);
+            }else{
+                 game.data.score += 50;
+                 me.levelDirector.loadLevel(this.gotolevel);
+                 me.game.viewport.fadeOut(this.fade, this.duration);
+            }
+           
+            
         },
 
         /**

@@ -78,16 +78,25 @@ game.PlayerEntity = me.ObjectEntity.extend({
 
     init: function (x, y, settings) {
         // call the constructor
-        settings.spritewidth = 84;
-        // settings.spriteheight = 64;
+        // settings.spritewidth = 73;
+        // settings.spriteheight = 96;
 
         this.parent(x, y, settings);
 
+        var walkarray = new Array();
+        for (var i = 0; i < settings.frameWalk; i++) walkarray[i] = i;
+
+
+        var diearray = new Array();
+        var jumparray = new Array();
+        diearray[0] =  settings.frameDie;
+        jumparray[0] =  settings.frameJump;
+
         this.renderable.anim = {};
-        this.renderable.addAnimation("walk", [0, 1, 2, 3, 4, 5, 6]);
+        this.renderable.addAnimation("walk", walkarray);
         // this.renderable.addAnimation("attack", [8, 6, 7]);
-        // this.renderable.addAnimation("jump", [9]);
-        // this.renderable.addAnimation("die", [10,11,12,13,14,16,17,18]);
+        this.renderable.addAnimation("jump", jumparray);
+        this.renderable.addAnimation("die", diearray);
         // this.renderable.setCurrentAnimation("walk");
         
         //this.renderable.setOffset(0, 110);
@@ -158,7 +167,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
                     // set the jumping flag
                     this.jumping = true;
 
-                    // me.audio.play("jump", false, null, 0.5);
+                    me.audio.play("jump", false, null, 0.5);
                 }
 
             }
@@ -183,7 +192,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
 
 
             if ((this.jumping || this.falling) && !this.attacking) {
-                // this.renderable.setCurrentAnimation("jump");
+                this.renderable.setCurrentAnimation("jump");
             }
             else {
                 if (!this.renderable.isCurrentAnimation("walk") && !this.attacking) this.renderable.setCurrentAnimation("walk");
@@ -204,7 +213,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
         }
 
         if (this.attacking) {
-            // this.updateColRect(40, 140, 90, 52);
+            this.updateColRect(40, 140, 90, 52);
         }
 
         var res = me.game.collide(this);
@@ -219,27 +228,27 @@ game.PlayerEntity = me.ObjectEntity.extend({
 
         // game.data.jacks = this.jacks;
 
-        // if (this.dying && this.renderable.anim["die"].idx == 7) {
-        //     this.renderable.animationpause = true;
-        //     this.deathTimer -= me.timer.tick;
-        //     if (this.deathTimer <= 0) {
-        //         if (game.data.lives == 0) {
-        //             this.gameOver = true;
-        //             // me.state.stop(true);
-        //             me.state.change(me.state.MENU);
-        //             return;
-        //         } else {
-        //             me.game.viewport.fadeIn("#000000", 500, this.reset.bind(this));
-        //         }
-        //     }
-        //     //this.renderable.alpha -= 0.01;
-        //     //if (this.renderable.alpha <= 0.01) me.game.remove(this);
-        // }
+        if (this.dying && this.renderable.anim["die"].idx == 0) {
+            this.renderable.animationpause = true;
+            this.deathTimer -= me.timer.tick;
+            if (this.deathTimer <= 0) {
+                if (game.data.lives == 0) {
+                    this.gameOver = true;
+                    // me.state.stop(true);
+                    me.state.change(me.state.MENU);
+                    return;
+                } else {
+                    me.game.viewport.fadeIn("#000000", 500, this.reset.bind(this));
+                }
+            }
+            //this.renderable.alpha -= 0.01;
+            //if (this.renderable.alpha <= 0.01) me.game.remove(this);
+        }
 
         
-        if (this.dying){
-            me.game.viewport.fadeIn("#000000", 500, this.reset.bind(this));
-        }
+        // if (this.dying){
+        //     me.game.viewport.fadeIn("#000000", 500, this.reset.bind(this));
+        // }
 
 
         // update animation if necessary
@@ -257,7 +266,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
     die: function () {
         if (!this.dying) {
             this.dying = true;
-            // this.renderable.setCurrentAnimation("die");
+            this.renderable.setCurrentAnimation("die");
             this.renderable.setAnimationFrame(0);
             // me.audio.play("tilly_die", false, null, 0.6);
 
