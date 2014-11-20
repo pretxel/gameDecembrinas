@@ -235,7 +235,9 @@ game.PlayerEntity = me.ObjectEntity.extend({
                 if (game.data.lives == 0) {
                     this.gameOver = true;
                     // me.state.stop(true);
-                    me.state.change(me.state.MENU);
+                    me.audio.stopTrack();
+                    me.state.set(me.state.SCORE, new myScoreScreen());
+                    me.state.change(me.state.SCORE);
                     return;
                 } else {
                     me.game.viewport.fadeIn("#000000", 500, this.reset.bind(this));
@@ -268,7 +270,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
             this.dying = true;
             this.renderable.setCurrentAnimation("die");
             this.renderable.setAnimationFrame(0);
-            // me.audio.play("tilly_die", false, null, 0.6);
+            me.audio.play("game_over", false, null, 0.6);
 
             game.data.lives--;
 

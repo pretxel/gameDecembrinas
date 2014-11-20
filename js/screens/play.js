@@ -6,7 +6,10 @@ game.PlayScreen = me.ScreenObject.extend({
 	    me.levelDirector.loadLevel("map1");
 
 	    // add our HUD to the game world        
-	    // me.game.add(new game.HUD.Container());
+	    me.game.add(new game.HUD.Container());
+
+	    // background music
+	    me.audio.playTrack("musica_de_fondo",0.3);
 	},
 	
 	

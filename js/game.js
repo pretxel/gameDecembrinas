@@ -1,15 +1,20 @@
 var game = {
 
+    flag: {
+        flagScore : false
+    },
+
 	 data: {
+        id: 1,
         score: 0,
-        lives: 3
+        lives: 4
     },
 
     // Run on page load.
     "onload" : function () {
         // Initialize the video.
         if (!me.video.init("screen", 1000, 480, true)) {
-            alert("Your browser does not support HTML5 canvas.");
+            alert("Tu Navegador no soporta HTML5 canvas.");
             return;
         }
 		
@@ -47,7 +52,7 @@ var game = {
         me.entityPool.add("hero", game.PlayerEntity);
 
         // Collectibles
-        // me.entityPool.add("SweetEntity", game.SweetEntity);
+        me.entityPool.add("SweetEntity", game.SweetEntity);
         // me.entityPool.add("JackEntity", game.JackEntity);
         // me.entityPool.add("BlockEntity", game.BlockEntity);
         // me.entityPool.add("ProjectileEntity", game.ProjectileEntity);
@@ -66,14 +71,33 @@ var game = {
         // me.input.bindKey(me.input.KEY.X, "attack", true);
         // me.input.bindKey(me.input.KEY.Z, "throw", true);
 
-        // me.input.bindKey(me.input.KEY.L, "levelskip", true); //function () { me.levelDirector.loadLevel("map2"); }.bind(this), true);
+        me.input.bindKey(me.input.KEY.L, "levelskip", true); //function () { me.levelDirector.loadLevel("map2"); }.bind(this), true);
 
         me.debug.renderHitBox = true;
 
         // Start the game.
         me.state.change(me.state.PLAY);
 
-        me.save.add(game.data);
+
+        if (localStorage.getItem("me.save.scores")){
+           // game.datosMar = JSON.stringify(eval("(" + localStorage.getItem("me.save.scores") + ")"));
+           //  game.datosMar = JSON.parse(localStorage.getItem("me.save.scores")); 
+
+           //  console.log("YA EXISTE");
+           //  console.log(game.datosMar);
+
+           // var newId =  (game.datosMar.id) + 1;
+           // game.data.id = newId;
+           // localStorage.setItem("me.save.scores"+newId, JSON.stringify(game.data) );
+           game.flag.score = true;
+        }else{
+            // localStorage.setItem("me.save.scores", JSON.stringify(game.data) );
+             // me.save.add(game.data);
+             // me.save.score = data;
+             game.flag.score = false;
+        }
+
+        // me.save.add(game.data);
         // me.state.set(me.state.SCORE, new myScoreScreen());
         // me.state.change(me.state.SCORE);
     }
@@ -106,6 +130,7 @@ me.LevelEntity = me.ObjectEntity.extend(
             me.save.score = game.data.score;
             if (this.gotolevel == "FIN"){
                 console.log("Termino el Juego");
+                me.audio.stopTrack();
                 me.state.set(me.state.SCORE, new myScoreScreen());
                 me.state.change(me.state.SCORE);
             }else{

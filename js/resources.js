@@ -1,7 +1,6 @@
 game.resources = [
 
-    { name: "lower_floor", type: "image", src: "data/img/lower_floor.png" },
-    { name: "upper_floor", type: "image", src: "data/img/upper_floor.png" },
+
     { name: "Bloque_flotante", type: "image", src: "data/img/navidad/Bloque_flotante.png" },
     { name: "Piso_inferior", type: "image", src: "data/img/navidad/Piso_inferior.png" },
     { name: "Piso_superior", type: "image", src: "data/img/navidad/Piso_superior.png" },
@@ -19,6 +18,12 @@ game.resources = [
     { name: "Escenario_2", type: "image", src: "data/img/nuevoA/Escenario_2.jpg" },
     { name: "Escenario_3", type: "image", src: "data/img/reyes/Escenario_3.jpg" },
 
+    { name: "caramelo", type: "image", src: "data/img/caramelo.png" },
+    { name: "corona", type: "image", src: "data/img/corona.png" },
+    { name: "uva", type: "image", src: "data/img/uva.png" },
+
+    { name: "live", type: "image", src: "data/img/vida.png" },
+
     { name: "mujer", type: "image", src: "data/sprite/mujer-frames.png" },
     { name: "boy", type: "image", src: "data/sprite/nino-frames.png" },
     { name: "cookie", type: "image", src: "data/sprite/galleta-frames.png" },
@@ -28,14 +33,21 @@ game.resources = [
     { name: "yeti2", type: "image", src: "data/sprite/yeti2-frames.png" },
     { name: "yeti3", type: "image", src: "data/sprite/yeti3-frames.png" },
 
-    
+    { name: "sc_bg", type: "image", src: "data/img/record.jpg" },
+    { name: "ts1", type: "image", src: "data/img/Personajes-record.png" },
+
 
     { name: "map1", type: "tmx", src: "data/map/1.tmx" },
     { name: "map2", type: "tmx", src: "data/map/2.tmx" },
     { name: "map3", type: "tmx", src: "data/map/3.tmx" },
 
+    { name: "font", type: "image", src: "data/img/fuente.png" },
 
-    { name: "jump", type: "audio", src: "data/sfx/", channel: 2 }
- 
+
+    { name: "jump", type: "audio", src: "data/sfx/", channel: 2 },
+    { name: "game_over", type: "audio", src: "data/sfx/", channel: 2 },
+    { name: "bonus_points", type: "audio", src: "data/sfx/", channel: 2 },
+    { name: "musica_de_fondo", type: "audio", src: "data/sfx/", channel: 2 }
+    
 
 ];
