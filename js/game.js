@@ -34,6 +34,9 @@ var game = {
         // Load the resources.
         me.loader.preload(game.resources);
 
+
+        
+
         // Initialize melonJS and display a loading screen.
         me.state.set(me.state.LOADING, new myLoadingScreen());
         me.state.change(me.state.LOADING);
@@ -128,7 +131,7 @@ me.LevelEntity = me.ObjectEntity.extend(
         onFadeComplete: function () {
 
             me.save.score = game.data.score;
-            if (this.gotolevel == "FIN"){
+            if (this.gotolevel == "FIN" || this.gotolevel == "fin"){
                 console.log("Termino el Juego");
                 me.audio.stopTrack();
                 me.state.set(me.state.SCORE, new myScoreScreen());

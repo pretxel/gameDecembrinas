@@ -33,13 +33,13 @@ game.resources = [
     { name: "yeti2", type: "image", src: "data/sprite/yeti2-frames.png" },
     { name: "yeti3", type: "image", src: "data/sprite/yeti3-frames.png" },
 
-    { name: "sc_bg", type: "image", src: "data/img/record.jpg" },
+    { name: "sc_bg", type: "image", src: "data/img/Score-Pantalla.png" },
     { name: "ts1", type: "image", src: "data/img/Personajes-record.png" },
 
 
-    { name: "map1", type: "tmx", src: "data/map/1.tmx" },
-    { name: "map2", type: "tmx", src: "data/map/2.tmx" },
-    { name: "map3", type: "tmx", src: "data/map/3.tmx" },
+    { name: "map1", type: "tmx", src: "data/map/1.json" },
+    { name: "map2", type: "tmx", src: "data/map/2.json" },
+    { name: "map3", type: "tmx", src: "data/map/3.json" },
 
     { name: "font", type: "image", src: "data/img/fuente.png" },
 

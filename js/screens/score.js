@@ -42,8 +42,12 @@
         this.font.alignText = "bottom";
         this.font.set("left", 1);
 
+         this.font2 = new me.BitmapFont("font", { x: 32, y: 32 });
+        this.font2.alignText = "bottom";
+        this.font2.set("left", 0.7);
 
-        this.ts1 = new me.SpriteObject(80, 50, me.loader.getImage("ts1"));
+
+        // this.ts1 = new me.SpriteObject(80, 50, me.loader.getImage("ts1"));
         
         //  var tween = new me.Tween(this.ts1.pos).to({ x: 195 }, 500).onComplete(null);
         // tween.easing(me.Tween.Easing.Quadratic.Out);
@@ -117,41 +121,45 @@
         // measure the logo size
         // var logo1_width = this.logo1.measureText(context, "Cargando...").width;
         context.drawImage(this.bg, 0, 0);
-        this.ts1.draw(context);
+        // this.ts1.draw(context);
         var xpos = me.video.getWidth() / 2;
         var ypos = me.video.getHeight() / 2;
 
         // clear surface
         // me.video.clearSurface(context, "black");
 
+        this.font2.draw(context, 'PRESIONA "R"' , xpos-130, ypos-120);
+        this.font2.draw(context, 'PARA REINICIAR' , xpos-150, ypos-90);
+
+
+
         // draw the melonJS logo
-        this.font.draw(context, 'SCORE : ' + game.data.score , xpos+70 , ypos-80);
+        this.font.draw(context, 'SCORE : ' + game.data.score , xpos-140 , ypos-50);
 
          if (game.flag.score){
-         	var yposSco = (me.video.getHeight() / 2) -60;
+         	var yposSco = (me.video.getHeight() / 2) -40;
          	var scoreGet = localStorage.getItem("me.save.scores");
         	var scoreLis = scoreGet.split(",");
         	var maxRecord = 0;
         	scoreLis.sort(sortNumber);
         	// Only five scores
 
-        	if (scoreLis.length > 5){
-        		maxRecord = 5;
+        	if (scoreLis.length > 3){
+        		maxRecord = 3;
         	}else{
         		maxRecord = scoreLis.length - 1;
         	}
 
         	for (var i = 0; i<maxRecord; i++){
         		
-        		yposSco += 35;
-        		this.font.draw(context, " " + (i+1) +" - " + scoreLis[i], xpos+70, yposSco );
+        		yposSco += 25;
+        		this.font2.draw(context, " " + (i+1) +".- " + scoreLis[i], xpos-90, yposSco );
         	}
          }
 
 
 
-        this.font.draw(context, 'PRESIONA "R"' , xpos-450, ypos-50);
-        this.font.draw(context, 'PARA REINICIAR' , xpos-450, ypos-20);
+        
         
         // xpos += logo1_width;
 
