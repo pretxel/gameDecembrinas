@@ -1,159 +1,168 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <title>Fiestas Decembrinas</title>
-        <link rel="stylesheet" type="text/css" media="screen" href="index.css">
-        <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta http-equiv="pragma" content="no-cache" />
-    </head>
-    <body>
-        <!-- Canvas placeholder -->
-        <div style="width:100%;height:100%;position:absolute;text-align:center;">
-		     <!-- <div id="screen" style="margin-top:100px;"></div>  -->
-            <!-- <div style="text-align:center;margin-top:15px;">Izquierda/Derecha/Arriba Flechas - Mover<br />Barra espaciadora - Saltar </div>  -->
 
-        </div>
+<head>
+    <title>Fiestas Decembrinas</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="index.css">
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="pragma" content="no-cache" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+</head>
 
-         <script type="text/javascript" src="lib/jquery-1.11.1.js"></script>
-         <script src="lib/gamecontroller.js"></script>
+<body>
+    <!-- Canvas placeholder -->
+    <div style="width:100%;height:100%;position:absolute;text-align:center;">
+        <!-- <div id="screen" style="margin-top:100px;"></div>  -->
+        <!-- <div style="text-align:center;margin-top:15px;">Izquierda/Derecha/Arriba Flechas - Mover<br />Barra espaciadora - Saltar </div>  -->
 
-		<!-- melonJS Library -->
-		<script type="text/javascript" src="lib/melonJS-0.9.9.js"></script>
-        
-		<!-- Plugin(s) -->
-		<script type="text/javascript" src="lib/plugins/debugPanel.js"></script>
-		
-		<script type="text/javascript" src="js/util.js"></script>
-		<!-- Game Scripts -->
-        <script type="text/javascript" src="js/game.js"></script>
-        <script type="text/javascript" src="js/resources.js"></script>
-		
-        <script type="text/javascript" src="js/hud.js"></script>
+    </div>
 
-        <!--
-		<script type="text/javascript" src="js/entities/sweet.js"></script>
-		<script type="text/javascript" src="js/entities/jack.js"></script>
-		<script type="text/javascript" src="js/entities/block.js"></script> -->
-		<script type="text/javascript" src="js/entities/hero.js"></script>
-		<script type="text/javascript" src="js/entities/sweet.js"></script>
-		<!--
-		<script type="text/javascript" src="js/entities/projectile.js"></script>
+    <script type="text/javascript" src="lib/jquery-1.11.1.js"></script>
+    <script src="lib/gamecontroller.js"></script>
 
-		<script type="text/javascript" src="js/entities/enemies/walking.js"></script> -->
-		<script type="text/javascript" src="js/entities/walking.js"></script>
+    <!-- melonJS Library -->
+    <script type="text/javascript" src="lib/melonJS-0.9.9.js"></script>
 
-        <!--<script type="text/javascript" src="js/screens/title.js"></script> -->
-        <script type="text/javascript" src="js/screens/play.js"></script>
-        <script type="text/javascript" src="js/screens/loading.js"></script>
-		<script type="text/javascript" src="js/screens/score.js"></script>
-		<script type="text/javascript" src="js/screens/title.js"></script>
-		<script type="text/javascript" src="js/screens/instruccions.js"></script>
-		<!-- Bootstrap & Mobile optimization tricks -->
-		<script type="text/javascript">
+    <!-- Plugin(s) -->
+    <script type="text/javascript" src="lib/plugins/debugPanel.js"></script>
 
-			window.onReady(function onReady() {
-				game.onload();
+    <script type="text/javascript" src="js/util.js"></script>
+    <!-- Game Scripts -->
+    <script type="text/javascript" src="js/game.js"></script>
+    <script type="text/javascript" src="js/resources.js"></script>
 
-				// Mobile browser hacks
-				if (me.sys.isMobile && !navigator.isCocoonJS) {
-					// Prevent the webview from moving on a swipe
-					window.document.addEventListener("touchmove", function (e) {
-						e.preventDefault();
-						window.scroll(0, 0);
-						return false;
-					}, false);
-
-					// Scroll away mobile GUI
-					(function () {
-						window.scrollTo(0, 1);
-						me.video.onresize(null);
-					}).defer();
-
-					me.event.subscribe(me.event.WINDOW_ONRESIZE, function (e) {
-						window.scrollTo(0, 1);
-					})
-
-					// Retina viewport settings
-					if (window.devicePixelRatio > 1) {
-						document.getElementById("viewport").setAttribute(
-							"content",
-							"width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=0"
-						);
-					}
-					
-					GameController.init( { 
-					
-					forcePerformanceFriendly : true,
-				    left: {
-				        type: 'dpad',
-				        dpad : {
-					        	up : {
-						        	touchStart : function(){
-						        		me.input.triggerKeyEvent(me.input.KEY.SPACE, true);
-						        	},
-						        	touchEnd : function(){
-						        		me.input.triggerKeyEvent(me.input.KEY.SPACE, false);
-						        	}
-					        	},
-					        	right : {
-					        		touchStart : function(){
-						        		me.input.triggerKeyEvent(me.input.KEY.RIGHT, true);
-						        	},
-						        	touchEnd : function(){
-						        		me.input.triggerKeyEvent(me.input.KEY.RIGHT, false);
-						        	}
-					        	},
-					        	left : {
-					        		touchStart : function(){
-						        		me.input.triggerKeyEvent(me.input.KEY.LEFT, true);
-						        	},
-						        	touchEnd : function(){
-						        		me.input.triggerKeyEvent(me.input.KEY.LEFT, false);
-						        	}
-					        	}
-				        }
-				        	
-				    }, 
-				    right: { 
-				        position: { 
-				            right: '5%' 
-				        }, 
-				        type: 'buttons', 
-				        buttons: [
-				        { 
-				            label: 'Salta', 
-				            fontSize: 13,
-				            radius: 40,
-				            touchStart: function() { 
-				                me.input.triggerKeyEvent(me.input.KEY.SPACE, true);
-				            }, touchEnd : function(){
-				            	me.input.triggerKeyEvent(me.input.KEY.SPACE, false);
-				            } 
-				        }, 
-				        false, false, false
-				        ] 
-				    }
-				} );
+    <script type="text/javascript" src="js/hud.js"></script>
 
 
-				}
-				$("canvas").width(jQuery(window).width()  );
-				
+    <script type="text/javascript" src="js/entities/hero.js"></script>
+    <script type="text/javascript" src="js/entities/sweet.js"></script>
 
-			});
+    <script type="text/javascript" src="js/entities/walking.js"></script>
 
-			jQuery(window).resize(function(){
+    <script type="text/javascript" src="js/screens/play.js"></script>
+    <script type="text/javascript" src="js/screens/loading.js"></script>
+    <script type="text/javascript" src="js/screens/score.js"></script>
+    <script type="text/javascript" src="js/screens/title.js"></script>
+    <script type="text/javascript" src="js/screens/instruccions.js"></script>
+    <!-- Bootstrap & Mobile optimization tricks -->
+    <script type="text/javascript">
+    window.onReady(function onReady() {
+        game.onload();
 
-		    // $("canvas").width(jQuery(window).width()  );
-		    //  $("canvas").height(jQuery(window).height()  );
-		    
+        // Mobile browser hacks
+        if (me.sys.isMobile && !navigator.isCocoonJS) {
+            // Prevent the webview from moving on a swipe
+            window.document.addEventListener("touchmove", function(e) {
+                e.preventDefault();
+                window.scroll(0, 0);
+                return false;
+            }, false);
 
-});
-		    
+            // Scroll away mobile GUI
+            (function() {
+                window.scrollTo(0, 1);
+                me.video.onresize(null);
+            }).defer();
 
-		</script>
-		
-    </body>
+            me.event.subscribe(me.event.WINDOW_ONRESIZE, function(e) {
+                window.scrollTo(0, 1);
+            })
+
+            // Retina viewport settings
+            if (window.devicePixelRatio > 1) {
+                document.getElementById("viewport").setAttribute(
+                    "content",
+                    "width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=0"
+                );
+            }
+
+            GameController.init({
+
+                forcePerformanceFriendly: true,
+                left: {
+                    type: 'dpad',
+                    dpad: {
+                        up: {
+                            touchStart: function() {
+                                me.input.triggerKeyEvent(me.input.KEY.SPACE, true);
+                            },
+                            touchEnd: function() {
+                                me.input.triggerKeyEvent(me.input.KEY.SPACE, false);
+                            }
+                        },
+                        right: {
+                            touchStart: function() {
+                                me.input.triggerKeyEvent(me.input.KEY.RIGHT, true);
+                            },
+                            touchEnd: function() {
+                                me.input.triggerKeyEvent(me.input.KEY.RIGHT, false);
+                            }
+                        },
+                        left: {
+                            touchStart: function() {
+                                me.input.triggerKeyEvent(me.input.KEY.LEFT, true);
+                            },
+                            touchEnd: function() {
+                                me.input.triggerKeyEvent(me.input.KEY.LEFT, false);
+                            }
+                        }
+                    }
+
+                },
+                right: {
+                    position: {
+                        right: '5%'
+                    },
+                    type: 'buttons',
+                    buttons: [{
+                            label: 'Salta',
+                            fontSize: 13,
+                            radius: 40,
+                            touchStart: function() {
+                                me.input.triggerKeyEvent(me.input.KEY.SPACE, true);
+                            },
+                            touchEnd: function() {
+                                me.input.triggerKeyEvent(me.input.KEY.SPACE, false);
+                            }
+                        },
+                        false, false, false
+                    ]
+                }
+            });
+
+
+        }
+        $("canvas").width(jQuery(window).width());
+
+
+    });
+
+    jQuery(window).resize(function() {
+
+        // $("canvas").width(jQuery(window).width()  );
+        //  $("canvas").height(jQuery(window).height()  );
+
+
+    });
+    </script>
+    <script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-55806005-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+</body>
+
 </html>
