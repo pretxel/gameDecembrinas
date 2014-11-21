@@ -140,11 +140,7 @@ game.WalkingEnemy = me.ObjectEntity.extend({
             }
         }
 
-        // if (this.dying && this.renderable.anim["die"].idx == this.renderable.anim["die"].length - 1) {
-        //     this.renderable.animationpause = true;
-        //     this.renderable.alpha -= 0.01;
-        //     if (this.renderable.alpha <= 0.01) me.game.remove(this);
-        // }
+     
 
         // update animation if necessary
         if (this.vel.x != 0 || this.vel.y != 0 || this.dying || this.knockback>0 || this.spawning) {
@@ -166,9 +162,5 @@ game.WalkingEnemy = me.ObjectEntity.extend({
         this.knockbackTime = 45;
     }
 
-    // die: function () {
-    //     this.dying = true;
-    //     this.renderable.setCurrentAnimation("die");
-    //     game.data.score += 50;
-    // }
+  
 });

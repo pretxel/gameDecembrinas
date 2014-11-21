@@ -34,6 +34,8 @@ game.resources = [
     { name: "yeti3", type: "image", src: "data/sprite/yeti3-frames.png" },
 
     { name: "sc_bg", type: "image", src: "data/img/Score-Pantalla.png" },
+    { name: "inicio_bg", type: "image", src: "data/img/Inicio.png" },
+    { name: "instrucciones_bg", type: "image", src: "data/img/Instrucciones.png" },
     { name: "ts1", type: "image", src: "data/img/Personajes-record.png" },
 
 

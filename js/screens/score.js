@@ -42,7 +42,7 @@
         this.font.alignText = "bottom";
         this.font.set("left", 1);
 
-         this.font2 = new me.BitmapFont("font", { x: 32, y: 32 });
+        this.font2 = new me.BitmapFont("font", { x: 32, y: 32 });
         this.font2.alignText = "bottom";
         this.font2.set("left", 0.7);
 
@@ -134,7 +134,7 @@
 
 
         // draw the melonJS logo
-        this.font.draw(context, 'SCORE : ' + game.data.score , xpos-140 , ypos-50);
+        this.font.draw(context, 'SCORE : ' + game.data.score , xpos-160 , ypos-50);
 
          if (game.flag.score){
          	var yposSco = (me.video.getHeight() / 2) -40;
@@ -160,47 +160,12 @@
 
 
         
-        
-        // xpos += logo1_width;
-
-        // ypos += this.logo1.measureText(context, "Cargando...").height / 2;
-
-        // // display a progressive loading bar
-        // var progress = Math.floor(this.loadPercent * 300);
-
-        // // draw the progress bar
-        // context.strokeStyle = "silver";
-        // context.strokeRect((me.video.getWidth()/2) - 150, ypos, 300, 6);
-        // context.fillStyle = "#89b002";
-        // context.fillRect((me.video.getWidth() / 2) - 148, ypos + 2, progress - 4, 2);
+      
     }
     
 });
 
-//  game.TitleScreen.StartText = me.Renderable.extend({
-//     init: function (x, y) {
-//         this.parent(new me.Vector2d(x, y), 10, 10);
 
-//         this.font = new me.BitmapFont("font", { x: 32, y: 32 });
-//         this.font.alignText = "bottom";
-//         this.font.set("center", 1);
-
-//         this.textScale = 1;
-
-//         this.floating = true;
-//     },
-
-//     update: function () {
-//         this.font.resize(this.textScale);
-
-//         return true;
-//     },
-
-//     draw: function (context) {
-//         this.font.draw(context, "Press SPACE to start!", this.pos.x, this.pos.y);
-
-//     }
-// });
 
 
  

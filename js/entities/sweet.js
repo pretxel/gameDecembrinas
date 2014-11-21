@@ -11,19 +11,14 @@ game.SweetEntity = me.CollectableEntity.extend({
 
         var sweetColor = Math.floor(4 * Math.random());
 
-        // this.renderable.anim = {};
-        // this.renderable.addAnimation("sweet", [sweetColor]);
-        // this.renderable.setCurrentAnimation("sweet");
+    
 
         this.rotation = -(Math.PI / 4);
         this.rotationDir = 0;
 
         this.startTween();
         
-        // this.pos.x += 8;
-        // this.z = 4;
-
-        // me.game.sort();
+      
 
         this.alwaysUpdate = true;
     },

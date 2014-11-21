@@ -1,7 +1,7 @@
 var game = {
 
     flag: {
-        flagScore : false
+        
     },
 
 	 data: {
@@ -46,7 +46,8 @@ var game = {
 
     // Run on game resources loaded.
     "loaded" : function () {
-        // me.state.set(me.state.MENU, new game.TitleScreen());
+        me.state.set(me.state.SETTINGS, new game.InstructionScreen());
+        me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());
 
         me.state.transition("fade", "#FFF", 250);
@@ -71,7 +72,7 @@ var game = {
         me.input.bindKey(me.input.KEY.RIGHT, "right");
         me.input.bindKey(me.input.KEY.UP, "jump", true);
         me.input.bindKey(me.input.KEY.SPACE, "jump", true);
-        // me.input.bindKey(me.input.KEY.X, "attack", true);
+        me.input.bindKey(me.input.KEY.ESC, "info", true);
         // me.input.bindKey(me.input.KEY.Z, "throw", true);
 
         me.input.bindKey(me.input.KEY.L, "levelskip", true); //function () { me.levelDirector.loadLevel("map2"); }.bind(this), true);
@@ -79,30 +80,22 @@ var game = {
         me.debug.renderHitBox = true;
 
         // Start the game.
-        me.state.change(me.state.PLAY);
+        me.state.change(me.state.MENU);
 
 
         if (localStorage.getItem("me.save.scores")){
-           // game.datosMar = JSON.stringify(eval("(" + localStorage.getItem("me.save.scores") + ")"));
-           //  game.datosMar = JSON.parse(localStorage.getItem("me.save.scores")); 
-
-           //  console.log("YA EXISTE");
-           //  console.log(game.datosMar);
-
-           // var newId =  (game.datosMar.id) + 1;
-           // game.data.id = newId;
-           // localStorage.setItem("me.save.scores"+newId, JSON.stringify(game.data) );
-           game.flag.score = true;
+            game.flag.score = true;
         }else{
-            // localStorage.setItem("me.save.scores", JSON.stringify(game.data) );
-             // me.save.add(game.data);
-             // me.save.score = data;
-             game.flag.score = false;
+            game.flag.score = false;
         }
 
-        // me.save.add(game.data);
-        // me.state.set(me.state.SCORE, new myScoreScreen());
-        // me.state.change(me.state.SCORE);
+        if (localStorage.getItem("me.save.instruction")){
+            game.flag.instruction = true;
+        }else{
+            game.flag.instruction = false;
+        }
+
+
     }
 
 }
@@ -131,17 +124,11 @@ me.LevelEntity = me.ObjectEntity.extend(
         onFadeComplete: function () {
 
             me.save.score = game.data.score;
-            if (this.gotolevel == "FIN" || this.gotolevel == "fin"){
-                console.log("Termino el Juego");
-                me.audio.stopTrack();
-                me.state.set(me.state.SCORE, new myScoreScreen());
-                me.state.change(me.state.SCORE);
-            }else{
-                 game.data.score += 50;
-                 me.levelDirector.loadLevel(this.gotolevel);
-                 me.game.viewport.fadeOut(this.fade, this.duration);
-            }
            
+           
+            game.data.score += 50;
+            me.levelDirector.loadLevel(this.gotolevel);
+            me.game.viewport.fadeOut(this.fade, this.duration);
             
         },
 
@@ -155,16 +142,26 @@ me.LevelEntity = me.ObjectEntity.extend(
          */
         goTo: function (level) {
             this.gotolevel = level || this.nextlevel;
-            // load a level
-            //console.log("going to : ", to);
-            if (this.fade && this.duration) {
-                if (!this.fading) {
-                    this.fading = true;
-                    me.game.viewport.fadeIn(this.fade, this.duration,
-                            this.onFadeComplete.bind(this));
+
+            if (this.gotolevel == "FIN" || this.gotolevel == "fin"){
+                me.audio.stopTrack();
+                me.state.set(me.state.SCORE, new myScoreScreen());
+                me.state.change(me.state.SCORE);
+
+            }
+            else{   
+
+                // load a level
+                //console.log("going to : ", to);
+                if (this.fade && this.duration) {
+                    if (!this.fading) {
+                        this.fading = true;
+                        me.game.viewport.fadeIn(this.fade, this.duration,
+                                this.onFadeComplete.bind(this));
+                    }
+                } else {
+                    me.levelDirector.loadLevel(this.gotolevel);
                 }
-            } else {
-                me.levelDirector.loadLevel(this.gotolevel);
             }
         },
 

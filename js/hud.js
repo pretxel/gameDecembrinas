@@ -29,10 +29,7 @@ game.HUD.Container = me.ObjectContainer.extend({
         this.addChild(new game.HUD.ScoreItem(me.game.viewport.width / 2, 22));
         this.addChild(new game.HUD.LivesItem(me.game.viewport.width - 80, 22));
 
-        // var spr = new me.SpriteObject(20, 20, me.loader.getImage("jack"), 30, 32);
-        // spr.floating = true;
-        // spr.z = 2;
-        // this.addChild(spr);
+        
 
         spr = new me.SpriteObject(me.game.viewport.width - 120, 22, me.loader.getImage("live"), 32, 32);
         spr.floating = true;

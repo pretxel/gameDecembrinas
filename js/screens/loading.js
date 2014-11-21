@@ -12,14 +12,18 @@ myLoadingScreen = me.ScreenObject.extend({
 
         // handle for the susbcribe function
         this.handle = null;
+        
+
+        
+
+        this.logo1 = new me.Font('impact', 32, 'white', 'middle');
+        this.logo1.textBaseline = "alphabetic";
 
     },
 
     // call when the loader is resetted
     onResetEvent: function () {
-        // melonJS logo
-        this.logo1 = new me.Font('impact', 32, 'white', 'middle');
-        this.logo1.textBaseline = "alphabetic";
+        
 
         // setup a callback
         this.handle = me.event.subscribe(me.event.LOADER_PROGRESS, this.onProgressUpdate.bind(this));
@@ -64,8 +68,10 @@ myLoadingScreen = me.ScreenObject.extend({
 
     draw: function (context) {
 
+
+
         // measure the logo size
-        var logo1_width = this.logo1.measureText(context, "Cargando...").width;
+        var logo1_width = this.logo1.measureText(context, "CARGANDO...").width;
         var xpos = (me.video.getWidth() - logo1_width)/2;
         var ypos = me.video.getHeight() / 2;
 
@@ -73,19 +79,19 @@ myLoadingScreen = me.ScreenObject.extend({
         me.video.clearSurface(context, "black");
 
         // draw the melonJS logo
-        this.logo1.draw(context, 'Cargando...', xpos, ypos);
+        this.logo1.draw(context, 'CARGANDO...', xpos, ypos);
         xpos += logo1_width;
 
-        ypos += this.logo1.measureText(context, "Cargando...").height / 2;
+        ypos += this.logo1.measureText(context, "CARGANDO...").height / 2;
 
         // display a progressive loading bar
         var progress = Math.floor(this.loadPercent * 300);
 
         // draw the progress bar
         context.strokeStyle = "silver";
-        context.strokeRect((me.video.getWidth()/2) - 150, ypos, 300, 6);
-        context.fillStyle = "#89b002";
-        context.fillRect((me.video.getWidth() / 2) - 148, ypos + 2, progress - 4, 2);
+        context.strokeRect((me.video.getWidth()/2) - 150, ypos +70, 300, 6);
+        context.fillStyle = "#ff8000";
+        context.fillRect((me.video.getWidth() / 2) - 148, ypos + 72, progress - 4, 2);
     }
 
 });
