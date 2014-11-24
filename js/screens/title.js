@@ -101,9 +101,10 @@ game.TitleScreen.StartText = me.Renderable.extend({
 
     draw: function (context) {
         if (game.flag.instruction){
-            this.font.draw(context, "INICIA EL JUEGO", me.video.getWidth() / 2, (me.video.getHeight() / 2) +200);
+            this.font.draw(context, "PRESIONA 'ENTER' PARA JUGAR", me.video.getWidth() / 2, (me.video.getHeight() / 2) +200);
         }else{
-            this.font.draw(context, "INSTRUCCIONES", me.video.getWidth() / 2, (me.video.getHeight() / 2) +200);
+            this.font.draw(context, "PRESIONA 'ENTER' ", me.video.getWidth() / 2, (me.video.getHeight() / 2) +170);
+            this.font.draw(context, "PARA VER INSTRUCCIONES", me.video.getWidth() / 2, (me.video.getHeight() / 2) +200);
         }
         
 

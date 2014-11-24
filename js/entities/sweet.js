@@ -5,20 +5,20 @@ game.SweetEntity = me.CollectableEntity.extend({
 
     // extending the init function is not mandatory
     // unless you need to add some extra initialization
-    init: function (x, y, settings) {
+    init: function(x, y, settings) {
         // call the parent constructor
         this.parent(x, y, settings);
 
         var sweetColor = Math.floor(4 * Math.random());
 
-    
+
 
         this.rotation = -(Math.PI / 4);
         this.rotationDir = 0;
 
         this.startTween();
-        
-      
+
+
 
         this.alwaysUpdate = true;
     },
@@ -26,13 +26,15 @@ game.SweetEntity = me.CollectableEntity.extend({
     startTween: function() {
         this.rotationDir = 1 - this.rotationDir;
 
-        var tween = new me.Tween(this).to({ rotation: (this.rotationDir * (Math.PI / 2)) - (Math.PI/4) }, 500 + (Math.random()*500)).onComplete(this.startTween.bind(this));
+        var tween = new me.Tween(this).to({
+            rotation: (this.rotationDir * (Math.PI / 2)) - (Math.PI / 4)
+        }, 500 + (Math.random() * 500)).onComplete(this.startTween.bind(this));
         tween.easing(me.Tween.Easing.Quadratic.Out);
         tween.start();
 
     },
 
-    update: function () {
+    update: function() {
         this.parent();
 
         this.renderable.angle = this.rotation;
@@ -45,7 +47,7 @@ game.SweetEntity = me.CollectableEntity.extend({
 
     // this function is called by the engine, when
     // an object is touched by something (here collected)
-    onCollision: function (res, obj) {
+    onCollision: function(res, obj) {
         // do something when collected
         if (obj instanceof game.PlayerEntity) {
 
@@ -61,9 +63,9 @@ game.SweetEntity = me.CollectableEntity.extend({
         }
     },
 
-    endCollect: function () {
+    endCollect: function() {
         // remove it
-        game.data.score+=10;
+        game.data.score += 10;
         me.game.remove(this);
     }
 

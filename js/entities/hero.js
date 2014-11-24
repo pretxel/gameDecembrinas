@@ -13,7 +13,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
     ------ */
 
 
-    init: function (x, y, settings) {
+    init: function(x, y, settings) {
         // call the constructor
         // settings.spritewidth = 73;
         // settings.spriteheight = 96;
@@ -26,8 +26,8 @@ game.PlayerEntity = me.ObjectEntity.extend({
 
         var diearray = new Array();
         var jumparray = new Array();
-        diearray[0] =  settings.frameDie;
-        jumparray[0] =  settings.frameJump;
+        diearray[0] = settings.frameDie;
+        jumparray[0] = settings.frameJump;
 
         this.renderable.anim = {};
         this.renderable.addAnimation("walk", walkarray);
@@ -35,15 +35,15 @@ game.PlayerEntity = me.ObjectEntity.extend({
         this.renderable.addAnimation("jump", jumparray);
         this.renderable.addAnimation("die", diearray);
         // this.renderable.setCurrentAnimation("walk");
-        
+
         //this.renderable.setOffset(0, 110);
 
         this.setVelocity(0.5, 1);
         this.setFriction(0.25, 0);
         this.setMaxVelocity(5, 15);
-        
+
         this.gravity = 0.5;
-      
+
         // this.updateColRect(80, 60, 90, 52);
 
         this.attacking = false;
@@ -72,7 +72,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
     update the player pos
  
     ------ */
-    update: function () {
+    update: function() {
 
         if (this.gameOver) return;
 
@@ -115,8 +115,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
 
             if ((this.jumping || this.falling) && !this.attacking) {
                 this.renderable.setCurrentAnimation("jump");
-            }
-            else {
+            } else {
                 if (!this.renderable.isCurrentAnimation("walk") && !this.attacking) this.renderable.setCurrentAnimation("walk");
             }
 
@@ -128,7 +127,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
         // check & update player movement
         this.updateMovement();
 
-        if (this.pos.y+50 > me.game.currentLevel.rows * me.game.currentLevel.tileheight && !this.dying) {
+        if (this.pos.y + 50 > me.game.currentLevel.rows * me.game.currentLevel.tileheight && !this.dying) {
             this.vel.y = -this.maxVel.y;
             this.vel.x = 0;
             this.die();
@@ -158,6 +157,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
                     this.gameOver = true;
                     // me.state.stop(true);
                     me.audio.stopTrack();
+                    me.game.world.removeChild(me.game.world.getEntityByProp("name", "HUD")[0]);
                     me.state.set(me.state.SCORE, new myScoreScreen());
                     me.state.change(me.state.SCORE);
                     return;
@@ -169,8 +169,8 @@ game.PlayerEntity = me.ObjectEntity.extend({
             //if (this.renderable.alpha <= 0.01) me.game.remove(this);
         }
 
-        
-       
+
+
 
 
         // update animation if necessary
@@ -185,7 +185,7 @@ game.PlayerEntity = me.ObjectEntity.extend({
         return false;
     },
 
-    die: function () {
+    die: function() {
         if (!this.dying) {
             this.dying = true;
             this.renderable.setCurrentAnimation("die");
@@ -199,8 +199,8 @@ game.PlayerEntity = me.ObjectEntity.extend({
         }
     },
 
-    reset: function () {
-       
+    reset: function() {
+
         this.pos.x = this.spawnPosition.x;
         this.pos.y = this.spawnPosition.y;
         this.dying = false;

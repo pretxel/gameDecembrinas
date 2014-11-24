@@ -53,7 +53,7 @@ game.HUD.ScoreItem = me.Renderable.extend({
 
         this.font = new me.BitmapFont("font", { x: 32, y: 32 });
         this.font.alignText = "bottom";
-        this.font.set("center", 1.3);
+        this.font.set("center", 1);
 
         this.score = 0;
 

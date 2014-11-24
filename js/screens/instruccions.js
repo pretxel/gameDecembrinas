@@ -92,7 +92,7 @@ game.InstructionScreen.StartText = me.Renderable.extend({
     },
 
     draw: function (context) {
-        this.font.draw(context, "INICIA EL JUEGO", me.video.getWidth() / 2, (me.video.getHeight() / 2) +200);
+        this.font.draw(context, "PRESIONA 'ENTER' PARA JUGAR", me.video.getWidth() / 2, (me.video.getHeight() / 2) +200);
 
     }
 });

@@ -1,5 +1,5 @@
 game.WalkingEnemy = me.ObjectEntity.extend({
-    init: function (x, y, settings) {
+    init: function(x, y, settings) {
         // define this here instead of tiled
         //settings.image = "furball";
         //settings.spritewidth = 110;
@@ -7,7 +7,7 @@ game.WalkingEnemy = me.ObjectEntity.extend({
 
 
         // call the parent constructor
-        this.parent(x, y-20, settings);
+        this.parent(x, y - 20, settings);
 
         this.renderable.anim = {};
 
@@ -36,7 +36,7 @@ game.WalkingEnemy = me.ObjectEntity.extend({
             this.walkLeft = false;
         }
 
-        this.updateColRect((settings.spriteheight-80)/2, 80, (settings.spriteheight-100), 90);
+        this.updateColRect((settings.spriteheight - 80) / 2, 80, (settings.spriteheight - 100), 90);
 
         // walking & jumping speed
         this.setVelocity(2, 6);
@@ -53,7 +53,7 @@ game.WalkingEnemy = me.ObjectEntity.extend({
         this.canKnockback = true;
         this.knockbackTime = 0;
 
-        
+
 
         this.alwaysUpdate = true;
 
@@ -61,25 +61,23 @@ game.WalkingEnemy = me.ObjectEntity.extend({
 
     // call by the engine when colliding with another object
     // obj parameter corresponds to the other object (typically the player) touching this one
-    onCollision: function (res, obj) {
+    onCollision: function(res, obj) {
 
         // res.y >0 means touched by something on the bottom
         // which mean at top position for this one
         if (this.alive && !this.renderable.isFlickering() && !this.dying && this.knockbackTime <= 0) {
             if (obj.attacking) {
-                
+
                 if (this.canKnockback) this.knockback((this.pos.x + this.renderable.hWidth) - (obj.pos.x + obj.renderable.hWidth));
                 this.health--;
                 if (this.health > 0) {
                     this.renderable.flicker(45);
-                }
-                else {
+                } else {
                     // this.die();
                 }
                 // me.audio.play("enemy_hit", false, null, 0.8);
 
-            }
-            else if (obj instanceof game.PlayerEntity) {
+            } else if (obj instanceof game.PlayerEntity) {
                 obj.renderable.flicker(45);
                 obj.die();
             }
@@ -87,10 +85,10 @@ game.WalkingEnemy = me.ObjectEntity.extend({
     },
 
     // manage the enemy movement
-    update: function () {
+    update: function() {
         // do nothing if not in viewport
         //if (!this.inViewport)
-          //  return false;
+        //  return false;
 
         if (this.alive && !this.dying && !this.knockbackTime > 0 && !this.spawning) {
             if (this.walkLeft && this.pos.x <= this.startX && this.constrained) {
@@ -119,15 +117,14 @@ game.WalkingEnemy = me.ObjectEntity.extend({
                 this.renderable.animationpause = true;
                 this.renderable.setAnimationFrame(0);
             }
-        }
-        else {
+        } else {
             this.maxVel.x = 2;
             if (!this.dying) {
                 this.renderable.animationpause = false;
             }
         }
 
-        
+
         if (!this.spawning) {
             // check and update movement
             var res = this.updateMovement();
@@ -140,21 +137,21 @@ game.WalkingEnemy = me.ObjectEntity.extend({
             }
         }
 
-     
+
 
         // update animation if necessary
-        if (this.vel.x != 0 || this.vel.y != 0 || this.dying || this.knockback>0 || this.spawning) {
+        if (this.vel.x != 0 || this.vel.y != 0 || this.dying || this.knockback > 0 || this.spawning) {
             // update object animation
             this.parent();
             return true;
         }
 
-        
+
 
         return false;
     },
 
-    knockback: function (dir) {
+    knockback: function(dir) {
         if (dir > 0) dir = 1;
         if (dir < 0) dir = -1;
         this.maxVel.x = 20;
@@ -162,5 +159,5 @@ game.WalkingEnemy = me.ObjectEntity.extend({
         this.knockbackTime = 45;
     }
 
-  
+
 });

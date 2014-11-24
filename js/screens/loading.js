@@ -76,7 +76,7 @@ myLoadingScreen = me.ScreenObject.extend({
         var ypos = me.video.getHeight() / 2;
 
         // clear surface
-        me.video.clearSurface(context, "black");
+        me.video.clearSurface(context, "white");
 
         // draw the melonJS logo
         this.logo1.draw(context, 'CARGANDO...', xpos, ypos);

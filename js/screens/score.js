@@ -15,7 +15,7 @@
     // call when the loader is resetted
     onResetEvent: function () {
         // melonJS logo
-         me.game.world.removeChild(me.game.world.getEntityByProp("name", "HUD")[0]);
+         // me.game.world.removeChild(me.game.world.getEntityByProp("name", "HUD")[0]);
 
 
         if (game.flag.score){
