@@ -13,10 +13,7 @@ myLoadingScreen = me.ScreenObject.extend({
         // handle for the susbcribe function
         this.handle = null;
         
-
-        
-
-        this.logo1 = new me.Font('impact', 32, 'white', 'middle');
+        this.logo1 = new me.Font('impact', 32, 'black', 'middle');
         this.logo1.textBaseline = "alphabetic";
 
     },

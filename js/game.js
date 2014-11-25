@@ -35,6 +35,8 @@ var game = {
         me.loader.preload(game.resources);
 
 
+
+
         
 
         // Initialize melonJS and display a loading screen.
@@ -80,7 +82,7 @@ var game = {
         me.debug.renderHitBox = true;
 
         // Start the game.
-        me.state.change(me.state.MENU);
+        me.state.change(me.state.PLAY);
 
 
         if (localStorage.getItem("me.save.scores")){

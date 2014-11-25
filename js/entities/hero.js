@@ -169,7 +169,15 @@ game.PlayerEntity = me.ObjectEntity.extend({
             //if (this.renderable.alpha <= 0.01) me.game.remove(this);
         }
 
-
+        if (game.data.lives == 0) {
+                    this.gameOver = true;
+                    // me.state.stop(true);
+                    me.audio.stopTrack();
+                    me.game.world.removeChild(me.game.world.getEntityByProp("name", "HUD")[0]);
+                    me.state.set(me.state.SCORE, new myScoreScreen());
+                    me.state.change(me.state.SCORE);
+                    return;
+        }
 
 
 
