@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Aventura Navideña</title>
+    <title>Aventura Navide&ntilde;a</title>
     <link rel="stylesheet" type="text/css" media="screen" href="index.css">
     <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -17,12 +17,12 @@
     <meta name="author" content="Banco Azteca - Elektra" />
     <meta name="copyright" content="Banco Azteca - Elektra" />
     <meta name="application-name" content="Aventura Navideña con Banco Azteca" />
-    <meta itemprop="image" content="http://tradicionmx.com/shareFB_muertos.jpg">
+    <meta itemprop="image" content="http://tradicionmx.com/shareFB.png">
 
     <!-- for Facebook -->
     <meta property="og:title" content="Aventura Navideña con Banco Azteca" />
     <meta property="og:type" content="game" />
-    <meta property="og:image" content="http://www.tradicionesmx.com/shareFB_muertos.jpg" />
+    <meta property="og:image" content="http://www.tradicionesmx.com/shareFB.png" />
     <meta property="og:url" content="http://www.tradicionesmx.com" />
     <meta property="og:description" content="Aventérate a esta emocionante historia navideña." />
 
@@ -32,7 +32,7 @@
     <meta name="twitter:title" content="Aventura Navideña con Banco Azteca">
     <meta name="twitter:description" content="Aventérate a esta emocionante historia navideña.">
     <meta name="twitter:creator" content="@elektraComMx">
-    <meta name="twitter:image:src" content="http://www.tradicionesmx/shareFB_muertos.jpg">
+    <meta name="twitter:image:src" content="http://www.tradicionesmx/shareFB.png">
     <meta name="twitter:domain" content="www.tradicionesmx.com">
 
 
@@ -51,12 +51,16 @@
 
 
 
-    <div id="other" style="position: absolute;">
-        <img id="jugar" src="data/img/Botones_0002_Layer-1.png" style="position: absolute;margin-left: 550px;margin-top: 200px;">
-        <img id="ayuda" src="data/img/Botones_0001_Layer-2.png" style="position: absolute;margin-left: 550px;margin-top: 280px;">
-        <img id="score" src="data/img/Botones_0000_Layer-3.png" style="position: absolute;margin-left: 550px;margin-top: 360px;">
-        <img id="botonIns" src="data/img/Boton_instruccciones.png" style="position: absolute;margin-left: 580px;margin-top: 350px; display: none;">
+    <div id="other" style="position: absolute; width:100%;">
+        <center><img id="jugar" src="data/img/Botones_0002_Layer-1.png" style="margin-top: 210px;"></center><br>
+        <center><img id="ayuda" src="data/img/Botones_0001_Layer-2.png" style=""></center><br>
+        <center><img id="score" src="data/img/Botones_0000_Layer-3.png" style=""></center>
+        <center><img id="botonIns" src="data/img/Boton_instruccciones.png" style="margin-top: 330px; display: none;">
+        <img id="botonReg" src="data/img/Boton_regresar.png" style="margin-left: -250px;display: none;"></center>
+       
     </div>
+
+
 
     <!-- <div id="ie">
         <img class="ieHack" id="jugar" src="data/img/Botones_0002_Layer-1.png" style="position: absolute;margin-left: 400px;margin-top: 200px;">
@@ -65,8 +69,10 @@
         <img class="ieHack" id="botonIns" src="data/img/Boton_instruccciones.png" style="position: absolute;margin-left: 450px;margin-top: 350px; display: none;">
     </div>
  -->
+  <img id="botonRegGame" src="data/img/Boton_regresar.png" style="position: absolute;margin-left: 880px;margin-top: 60px;display: none;">
+    <img src="data/img/facebook.svg" class="buttonFac" id="buttonFacebook">
 
-
+    <img src="data/img/twitter.svg" class="buttonTwit" id="buttonTwitter">
 
 
 
@@ -197,7 +203,7 @@
             $("#ayuda").hide();
             $("#jugar").hide();
             $("#score").hide();
-
+            $("#botonRegGame").show();
             // me.state.restart(true);
             me.state.resume(true);
         });
@@ -210,6 +216,8 @@
             $("#score").hide();
             $("#wallAyuda").show();
             $("#botonIns").show();
+            $("#botonReg").show();
+            
 
         });
 
@@ -219,6 +227,7 @@
             $("#ayuda").hide();
             $("#jugar").hide();
             $("#score").hide();
+            $("#botonRegGame").show();
             me.state.resume(true);
             me.state.set(me.state.SCORE, new myScoreScreen());
             game.data.lives = 0;
@@ -231,15 +240,24 @@
         $("#botonIns").click(function() {
             $("#wallAyuda").hide();
             $("#botonIns").hide();
+            $("#botonReg").hide();
             $("#score").hide();
+            $("#botonRegGame").show();
             me.state.resume(true);
+        });
+
+         $("#botonReg").click(function() {
+            document.location = '/';
+        });
+         $("#botonRegGame").click(function() {
+            document.location = '/';
         });
 
         $("#buttonFacebook").click(function() {
             window.open("http://www.facebook.com/sharer.php?u=" + encodeURIComponent("http://www.tradicionesmx.com"));
         });
         $("#buttonTwitter").click(function() {
-            window.open("https://twitter.com/share?text=Aventúrate a esta emocionantes hisotoria navideña.&url=" + encodeURIComponent("http://www.tradicionesmx.com"));
+            window.open("https://twitter.com/share?text=Aventúrate a esta emocionantes historia navideña.&url=" + encodeURIComponent("http://www.tradicionesmx.com"));
         });
 
 

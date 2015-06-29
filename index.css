@@ -34,7 +34,7 @@ body {
     width: 400px;
 }
 
-#jugar, #score, #ayuda, #botonIns {
+#jugar, #score, #ayuda, #botonIns, #botonReg, #botonRegGame {
     cursor: pointer;
 }
 
@@ -42,3 +42,17 @@ body {
     margin-left: 100px;
 }
 
+.buttonFac{
+    position: absolute;
+    margin-top: 500px;
+    width: 70px;
+    cursor: pointer;
+}
+
+.buttonTwit{
+    position: absolute;
+    margin-top: 500px;
+    margin-left: 90px;
+    width: 70px;
+    cursor: pointer;
+}
